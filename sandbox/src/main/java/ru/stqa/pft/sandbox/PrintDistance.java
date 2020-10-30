@@ -6,6 +6,7 @@ public class PrintDistance {
         Point p = new Point(1, 2);
         Point t = new Point(3, 4);
         System.out.println("Расстояние между точками равно " + p.distance(t));
+
     }
 
 }
