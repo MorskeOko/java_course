@@ -1,5 +1,6 @@
 package ru.stqa.pft.adressbook;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
@@ -11,6 +12,7 @@ import org.testng.annotations.BeforeMethod;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
+    protected boolean acceptNextAlert = true;
     FirefoxDriver wd;
 
     @BeforeMethod(alwaysRun = true)
@@ -20,6 +22,12 @@ public class TestBase {
         wd.get("http://localhost/adressbook/group.php");
         login("admin", "secret");
     }
+
+    @AfterMethod(alwaysRun = true)
+    public void tearDown() throws Exception {
+        wd.quit();
+    }
+
 
     private void login(String username, String password) {
         wd.findElement(By.name("user")).clear();
@@ -52,11 +60,6 @@ public class TestBase {
 
     protected void initGroupCreation() {
         wd.findElement(By.name("new")).click();
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void tearDown() throws Exception {
-        wd.quit();
     }
 
     private boolean isElementPresent(By by) {
@@ -133,5 +136,20 @@ public class TestBase {
 
     protected void goToContactCreation() {
       wd.findElement(By.linkText("add new")).click();
+    }
+
+    protected String closeAlertAndGetItsText() {
+        try {
+            Alert alert = wd.switchTo().alert();
+            String alertText = alert.getText();
+            if (acceptNextAlert) {
+                alert.accept();
+            } else {
+                alert.dismiss();
+            }
+            return alertText;
+        } finally {
+            acceptNextAlert = true;
+        }
     }
 }
