@@ -21,7 +21,27 @@ public class ContactData {
     private final String secondaryHome;
     private final String selectGroup;
 
-    public ContactData(String firstName, String middleName, String lastName, String nickName, String title, String company, String address, String home, String mobilePhone, String workPhone, String fax, String email, String homepage, String birthDay, String birthMonth, String birthYear, String secondaryAddress, String secondaryHome, String selectGroup) {
+    public ContactData(String firstName,
+                       String middleName,
+                       String lastName,
+                       String nickName,
+                       String title,
+                       String company,
+                       String address,
+                       String home,
+                       String mobilePhone,
+                       String workPhone,
+                       String fax,
+                       String email,
+                       String homepage,
+                       String birthDay,
+                       String birthMonth,
+                       String birthYear,
+                       String selectGroup,
+                       String secondaryAddress,
+                       String secondaryHome
+                          )
+    {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -38,9 +58,10 @@ public class ContactData {
         this.birthDay = birthDay;
         this.birthMonth = birthMonth;
         this.birthYear = birthYear;
+        this.selectGroup = selectGroup;
         this.secondaryAddress = secondaryAddress;
         this.secondaryHome = secondaryHome;
-        this.selectGroup = selectGroup;
+
     }
 
     public String getFirstName() {
@@ -107,6 +128,10 @@ public class ContactData {
         return birthYear;
     }
 
+    public String getSelectGroup() {
+        return selectGroup;
+    }
+
     public String getSecondaryAddress() {
         return secondaryAddress;
     }
@@ -115,7 +140,4 @@ public class ContactData {
         return secondaryHome;
     }
 
-    public String getSelectGroup() {
-        return selectGroup;
-    }
 }

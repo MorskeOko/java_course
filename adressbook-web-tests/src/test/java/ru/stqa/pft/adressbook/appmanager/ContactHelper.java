@@ -1,9 +1,11 @@
 package ru.stqa.pft.adressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.adressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase {
@@ -12,7 +14,7 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void fillContactForm(ContactData contactData) {
+    public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("lastname"), contactData.getLastName());
@@ -30,9 +32,25 @@ public class ContactHelper extends HelperBase {
         new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactData.getBirthMonth());
         wd.findElement(By.name("byear")).clear();
         wd.findElement(By.name("byear")).sendKeys(contactData.getBirthYear());
-        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getSelectGroup());
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getSelectGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
+
         type(By.name("address2"),contactData.getSecondaryAddress());
         type(By.name("phone2"),contactData.getSecondaryHome());
+
+    }
+
+    public boolean isElementPresent(By locator) {
+       try {
+           wd.findElement(locator);
+           return true;
+       }
+       catch (NoSuchElementException ex) {
+           return false;
+       }
 
     }
 
@@ -53,6 +71,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void submitContactModification() {
-        click(By.xpath("//input[@name='update'])[2]"));
+  //      click(By.xpath("//input[@name='update'])[2]"));
+        click(By.name("update"));
     }
 }
