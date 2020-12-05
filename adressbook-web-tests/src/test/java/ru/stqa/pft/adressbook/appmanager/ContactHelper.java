@@ -19,7 +19,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("nickname"), contactData.getNickName());
-        type(By.name("title"),contactData.getTitle());
+        type(By.name("title"), contactData.getTitle());
         type(By.name("company"), contactData.getCompany());
         type(By.name("address"), contactData.getAddress());
         type(By.name("home"), contactData.getHome());
@@ -38,19 +38,18 @@ public class ContactHelper extends HelperBase {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
 
-        type(By.name("address2"),contactData.getSecondaryAddress());
-        type(By.name("phone2"),contactData.getSecondaryHome());
+        type(By.name("address2"), contactData.getSecondaryAddress());
+        type(By.name("phone2"), contactData.getSecondaryHome());
 
     }
 
     public boolean isElementPresent(By locator) {
-       try {
-           wd.findElement(locator);
-           return true;
-       }
-       catch (NoSuchElementException ex) {
-           return false;
-       }
+        try {
+            wd.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
 
     }
 
@@ -71,7 +70,21 @@ public class ContactHelper extends HelperBase {
     }
 
     public void submitContactModification() {
-  //      click(By.xpath("//input[@name='update'])[2]"));
+        //      click(By.xpath("//input[@name='update'])[2]"));
         click(By.name("update"));
+    }
+
+    public boolean isTHereAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    public void goToContactCreation() {
+        click(By.linkText("add new"));
+    }
+
+    public void createContact(ContactData contactData, boolean b) {
+        goToContactCreation();
+        fillContactForm(contactData, b);
+        saveContact();
     }
 }

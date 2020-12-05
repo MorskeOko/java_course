@@ -36,11 +36,6 @@ public class NavigationHelper extends HelperBase{
         catch (NoSuchElementException ex) {
             return false;
         }
-
     }
 
-
-    public void goToContactCreation() {
-        click(By.linkText("add new"));
-    }
 }
