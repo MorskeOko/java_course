@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.adressbook.model.ContactData;
 
+import java.util.List;
+
 public class ContactModificationTest extends TestBase {
 
     @Test
@@ -31,7 +33,7 @@ public class ContactModificationTest extends TestBase {
                     "secondary address"
             ),true);
         }
-        int before = app.getContactHelper().getContactCount();
+        List<ContactData> before = app.getContactHelper().getContactList();
         app.getNavigationHelper().goToHomePage();
         app.getContactHelper().initContactModification(0);
         app.getContactHelper().fillContactForm(new ContactData("ChangedFirstName",
@@ -56,7 +58,7 @@ public class ContactModificationTest extends TestBase {
                 ), false);
         app.getContactHelper().submitContactModification();
         app.getNavigationHelper().goToHomePage();
-        int after = app.getContactHelper().getContactCount();
-        Assert.assertEquals(after, before);
+        List<ContactData> after = app.getContactHelper().getContactList();
+        Assert.assertEquals(after.size(), before.size());
     }
 }
