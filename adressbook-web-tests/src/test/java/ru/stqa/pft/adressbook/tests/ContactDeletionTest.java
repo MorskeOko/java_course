@@ -1,11 +1,11 @@
 package ru.stqa.pft.adressbook.tests;
 
 
-import org.testng.annotations.*;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import ru.stqa.pft.adressbook.model.ContactData;
-import ru.stqa.pft.adressbook.model.GroupData;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertTrue;
 
 public class ContactDeletionTest extends TestBase {
 
@@ -35,11 +35,14 @@ public class ContactDeletionTest extends TestBase {
                     "secondary address"
             ),true);
         }
-        app.getContactHelper().selectContact();
+        int before = app.getContactHelper().getContactCount();
+        app.getContactHelper().selectContact(0);
         app.getContactHelper().clickDeleteContact();
         app.acceptNextAlert = true;
         assertTrue(app.closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
         app.getNavigationHelper().goToHomePage();
+        int after = app.getContactHelper().getContactCount();
+        Assert.assertEquals(after, before-1);
     }
 
 }
