@@ -4,14 +4,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.adressbook.model.ContactData;
 
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactModificationTest extends TestBase {
 
     @Test
     public void testContactModification() throws Exception {
-        int index = 0;
+
         app.getNavigationHelper().goToHomePage();
         if (! app.getContactHelper().isTHereAContact()) {
             app.getContactHelper().createContact(new ContactData("firstName",
@@ -37,6 +36,7 @@ public class ContactModificationTest extends TestBase {
         }
         app.getNavigationHelper().goToHomePage();
         List<ContactData> before = app.getContactHelper().getContactList();
+        int index = before.size()-1;
         app.getContactHelper().initContactModification(index);
         ContactData contact = new ContactData("ChangedFirstName",
                 "ChangedMiddleName",
@@ -65,6 +65,7 @@ public class ContactModificationTest extends TestBase {
         before.remove(index);
         before.add(contact);
 //        Assert.assertEquals(before, after);
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+        Assert.assertEquals(before, after);
+ //       Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     }
 }
