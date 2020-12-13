@@ -22,6 +22,8 @@ public class ContactData {
     private final String secondaryAddress;
     private final String secondaryHome;
     private final String selectGroup;
+    private final String id;
+
 
     public ContactData(String firstName,
                        String middleName,
@@ -43,6 +45,50 @@ public class ContactData {
                        String secondaryAddress,
                        String secondaryHome
     ) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.nickName = nickName;
+        this.title = title;
+        this.company = company;
+        this.address = address;
+        this.home = home;
+        this.mobilePhone = mobilePhone;
+        this.workPhone = workPhone;
+        this.fax = fax;
+        this.email = email;
+        this.homepage = homepage;
+        this.birthDay = birthDay;
+        this.birthMonth = birthMonth;
+        this.birthYear = birthYear;
+        this.selectGroup = selectGroup;
+        this.secondaryAddress = secondaryAddress;
+        this.secondaryHome = secondaryHome;
+        id = null;
+    }
+
+    public ContactData(String id,
+                       String firstName,
+                       String middleName,
+                       String lastName,
+                       String nickName,
+                       String title,
+                       String company,
+                       String address,
+                       String home,
+                       String mobilePhone,
+                       String workPhone,
+                       String fax,
+                       String email,
+                       String homepage,
+                       String birthDay,
+                       String birthMonth,
+                       String birthYear,
+                       String selectGroup,
+                       String secondaryAddress,
+                       String secondaryHome
+    ) {
+        this.id = id;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
