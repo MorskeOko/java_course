@@ -14,6 +14,7 @@ public class ContactDeletionTest extends TestBase {
     @Test
 
     public void testContactDeletion() throws Exception {
+        int index = 0;
         app.getNavigationHelper().goToHomePage();
         if (! app.getContactHelper().isTHereAContact()) {
             app.getContactHelper().createContact(new ContactData("firstName",
@@ -38,13 +39,15 @@ public class ContactDeletionTest extends TestBase {
             ),true);
         }
         List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContact(0);
+        app.getContactHelper().selectContact(index);
         app.getContactHelper().clickDeleteContact();
         app.acceptNextAlert = true;
         assertTrue(app.closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
         app.getNavigationHelper().goToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size()-1);
+        before.remove(index);
+        Assert.assertEquals(before, after);
     }
 
 }
