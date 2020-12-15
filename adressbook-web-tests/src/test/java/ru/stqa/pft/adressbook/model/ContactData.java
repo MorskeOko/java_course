@@ -22,52 +22,11 @@ public class ContactData {
     private final String secondaryAddress;
     private final String secondaryHome;
     private final String selectGroup;
-    private final String id;
+    private  int id;
 
 
-    public ContactData(String firstName,
-                       String middleName,
-                       String lastName,
-                       String nickName,
-                       String title,
-                       String company,
-                       String address,
-                       String home,
-                       String mobilePhone,
-                       String workPhone,
-                       String fax,
-                       String email,
-                       String homepage,
-                       String birthDay,
-                       String birthMonth,
-                       String birthYear,
-                       String selectGroup,
-                       String secondaryAddress,
-                       String secondaryHome
-    ) {
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.nickName = nickName;
-        this.title = title;
-        this.company = company;
-        this.address = address;
-        this.home = home;
-        this.mobilePhone = mobilePhone;
-        this.workPhone = workPhone;
-        this.fax = fax;
-        this.email = email;
-        this.homepage = homepage;
-        this.birthDay = birthDay;
-        this.birthMonth = birthMonth;
-        this.birthYear = birthYear;
-        this.selectGroup = selectGroup;
-        this.secondaryAddress = secondaryAddress;
-        this.secondaryHome = secondaryHome;
-        id = null;
-    }
 
-    public ContactData(String id,
+    public ContactData(int id,
                        String firstName,
                        String middleName,
                        String lastName,
@@ -109,6 +68,10 @@ public class ContactData {
         this.secondaryAddress = secondaryAddress;
         this.secondaryHome = secondaryHome;
 
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getFirstName() {
@@ -187,6 +150,62 @@ public class ContactData {
         return secondaryHome;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ContactData(String firstName,
+                       String middleName,
+                       String lastName,
+                       String nickName,
+                       String title,
+                       String company,
+                       String address,
+                       String home,
+                       String mobilePhone,
+                       String workPhone,
+                       String fax,
+                       String email,
+                       String homepage,
+                       String birthDay,
+                       String birthMonth,
+                       String birthYear,
+                       String selectGroup,
+                       String secondaryAddress,
+                       String secondaryHome
+    ) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.nickName = nickName;
+        this.title = title;
+        this.company = company;
+        this.address = address;
+        this.home = home;
+        this.mobilePhone = mobilePhone;
+        this.workPhone = workPhone;
+        this.fax = fax;
+        this.email = email;
+        this.homepage = homepage;
+        this.birthDay = birthDay;
+        this.birthMonth = birthMonth;
+        this.birthYear = birthYear;
+        this.selectGroup = selectGroup;
+        this.secondaryAddress = secondaryAddress;
+        this.secondaryHome = secondaryHome;
+        id = 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return id == that.id &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(lastName, that.lastName);
+    }
+
     @Override
     public String toString() {
         return "ContactData{" +
@@ -196,16 +215,8 @@ public class ContactData {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactData that = (ContactData) o;
-        return Objects.equals(firstName, that.firstName) &&
-                Objects.equals(lastName, that.lastName);
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, id);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName);
-    }
 }
