@@ -38,7 +38,6 @@ public class GroupHelper extends HelperBase{
 
     public void initGroupModification() {
         click(By.name("edit"));
-
     }
 
     public void submitGroupModification() {
@@ -57,6 +56,14 @@ public class GroupHelper extends HelperBase{
         initGroupCreation();
         fillGroupForm(group);
         submitGroupCreation();
+        gotoGroupPage();
+    }
+
+    public void modifyGroup(int index, GroupData group) {
+        selectGroup(index);
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
         gotoGroupPage();
     }
 
