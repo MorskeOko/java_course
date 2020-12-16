@@ -19,7 +19,7 @@ public class GroupModificationTests extends TestBase {
         int index = before.size()-1;
         app.getGroupHelper().selectGroup(index);
         app.getGroupHelper().initGroupModification();
-        GroupData group = new GroupData(before.get(index).getId(),"test1", "test2", "test3");
+        GroupData group = new GroupData(before.get(index).getId(),"testNew", "test2", "test3");
         app.getGroupHelper().fillGroupForm(group);
         app.getGroupHelper().submitGroupModification();
         app.getNavigationHelper().gotoGroupPage();
