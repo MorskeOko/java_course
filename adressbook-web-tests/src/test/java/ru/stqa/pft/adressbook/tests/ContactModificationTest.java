@@ -4,7 +4,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.adressbook.model.ContactData;
-
 import java.util.Comparator;
 import java.util.List;
 
@@ -12,9 +11,9 @@ public class ContactModificationTest extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.getNavigationHelper().goToHomePage();
-        if (!app.getContactHelper().isTHereAContact()) {
-            app.getContactHelper().createContact(new ContactData("firstName",
+        app.goTo().homePage();
+        if (app.contact().list().size()==0) {
+            app.contact().create(new ContactData("firstName",
                     "middleName",
                     "lastName",
                     "nickName",
@@ -35,12 +34,12 @@ public class ContactModificationTest extends TestBase {
                     "secondary address"
             ), true);
         }
-        app.getNavigationHelper().goToHomePage();
+        app.goTo().homePage();
     }
 
     @Test
     public void testContactModification() throws Exception {
-        List<ContactData> before = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contact().list();
         int index = before.size() - 1;
         ContactData contact = new ContactData("ChangedFirstName",
                 "ChangedMiddleName",
@@ -61,9 +60,9 @@ public class ContactModificationTest extends TestBase {
                 null,
                 "secondaryHome",
                 "secondary address");
-        app.getContactHelper().modifyContact(index, contact);
-        app.getNavigationHelper().goToHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        app.contact().modify(index, contact);
+        app.goTo().homePage();
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size());
         contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
         before.remove(index);

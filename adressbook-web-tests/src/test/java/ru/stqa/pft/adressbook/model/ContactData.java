@@ -24,8 +24,6 @@ public class ContactData {
     private final String selectGroup;
     private  int id;
 
-
-
     public ContactData(int id,
                        String firstName,
                        String middleName,
@@ -219,6 +217,5 @@ public class ContactData {
     public int hashCode() {
         return Objects.hash(firstName, lastName, id);
     }
-
 
 }
