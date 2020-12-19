@@ -8,8 +8,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.adressbook.model.ContactData;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -60,12 +61,21 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("(//input[@name='submit'])[2]"));
     }
 
+    public void delete(ContactData contact) {
+        selectContactById(contact.getId());
+        clickDeleteContact();
+    }
+
     public void clickDeleteContact() {
         click(By.xpath("//input[@value='Delete']"));
     }
 
     public void selectContact(int i) {
         wd.findElements(By.name("selected[]")).get(i).click();
+    }
+
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
     public void initContactModification(int i) {
@@ -93,12 +103,18 @@ public class ContactHelper extends HelperBase {
         submitContactModification();
     }
 
+    public void modify(ContactData contact) {
+        initContactModification(contact.getId());
+        fillContactForm(contact, false);
+        submitContactModification();
+    }
+
     public int getContactCount() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> list() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
+    public Set<ContactData> all() {
+        Set<ContactData> contacts = new HashSet<>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             String lastName = element.findElement(By.xpath("td[2]")).getText();

@@ -68,6 +68,48 @@ public class ContactData {
 
     }
 
+    public ContactData(String firstName,
+                       String middleName,
+                       String lastName,
+                       String nickName,
+                       String title,
+                       String company,
+                       String address,
+                       String home,
+                       String mobilePhone,
+                       String workPhone,
+                       String fax,
+                       String email,
+                       String homepage,
+                       String birthDay,
+                       String birthMonth,
+                       String birthYear,
+                       String selectGroup,
+                       String secondaryAddress,
+                       String secondaryHome
+    ) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.nickName = nickName;
+        this.title = title;
+        this.company = company;
+        this.address = address;
+        this.home = home;
+        this.mobilePhone = mobilePhone;
+        this.workPhone = workPhone;
+        this.fax = fax;
+        this.email = email;
+        this.homepage = homepage;
+        this.birthDay = birthDay;
+        this.birthMonth = birthMonth;
+        this.birthYear = birthYear;
+        this.selectGroup = selectGroup;
+        this.secondaryAddress = secondaryAddress;
+        this.secondaryHome = secondaryHome;
+        id = 0;
+    }
+
     public int getId() {
         return id;
     }
@@ -148,50 +190,9 @@ public class ContactData {
         return secondaryHome;
     }
 
-    public void setId(int id) {
+    public ContactData withId(int id) {
         this.id = id;
-    }
-
-    public ContactData(String firstName,
-                       String middleName,
-                       String lastName,
-                       String nickName,
-                       String title,
-                       String company,
-                       String address,
-                       String home,
-                       String mobilePhone,
-                       String workPhone,
-                       String fax,
-                       String email,
-                       String homepage,
-                       String birthDay,
-                       String birthMonth,
-                       String birthYear,
-                       String selectGroup,
-                       String secondaryAddress,
-                       String secondaryHome
-    ) {
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.nickName = nickName;
-        this.title = title;
-        this.company = company;
-        this.address = address;
-        this.home = home;
-        this.mobilePhone = mobilePhone;
-        this.workPhone = workPhone;
-        this.fax = fax;
-        this.email = email;
-        this.homepage = homepage;
-        this.birthDay = birthDay;
-        this.birthMonth = birthMonth;
-        this.birthYear = birthYear;
-        this.selectGroup = selectGroup;
-        this.secondaryAddress = secondaryAddress;
-        this.secondaryHome = secondaryHome;
-        id = 0;
+        return this;
     }
 
     @Override
@@ -201,7 +202,6 @@ public class ContactData {
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {
