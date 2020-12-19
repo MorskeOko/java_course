@@ -4,8 +4,7 @@ package ru.stqa.pft.adressbook.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.adressbook.model.ContactData;
-
-import java.util.Set;
+import ru.stqa.pft.adressbook.model.Contacts;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -43,15 +42,15 @@ public class ContactDeletionTest extends TestBase {
 
     @Test
     public void testContactDeletion() throws Exception {
-        Set<ContactData> before = app.contact().all();
+        Contacts before = app.contact().all();
         ContactData deletedContact = before.iterator().next();
         app.contact().delete(deletedContact);
         app.acceptNextAlert = true;
         assertTrue(app.closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
         app.goTo().homePage();
-        Set<ContactData> after = app.contact().all();
+        Contacts after = app.contact().all();
         assertThat(after.size(), equalTo(before.size()-1));
         before.remove(deletedContact);
-        assertThat(after, equalTo(before));
+        assertThat(after, equalTo(before.withOut(deletedContact)));
     }
 }
