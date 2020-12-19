@@ -6,6 +6,9 @@ import ru.stqa.pft.adressbook.model.ContactData;
 
 import java.util.Set;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
+
 public class ContactCreationTest extends TestBase {
 
     @Test
@@ -36,11 +39,9 @@ public class ContactCreationTest extends TestBase {
         app.contact().create(contact, true);
         app.goTo().homePage();
         Set<ContactData> after = app.contact().all();
-        Assert.assertEquals(after.size(), before.size() + 1);
+        assertThat(after.size(), equalTo(before.size()+1));
         before.add(contact);
         contact.withId(after.stream().mapToInt((g)-> g.getId()).max().getAsInt());
-        Assert.assertEquals(before, after);
-
-
+        assertThat(after, equalTo(before));
     }
 }
