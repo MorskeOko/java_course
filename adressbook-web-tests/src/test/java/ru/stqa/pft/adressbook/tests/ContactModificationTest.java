@@ -64,8 +64,8 @@ public class ContactModificationTest extends TestBase {
                 "secondary address");
         app.contact().modify(contact);
         app.goTo().homePage();
+        assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.contact().all();
-        assertThat(after.size(), equalTo(before.size()));
         contact.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
         before.remove(modifiedContact);
         before.add(contact);
