@@ -11,6 +11,8 @@ import ru.stqa.pft.adressbook.model.Contacts;
 
 import java.util.List;
 
+import static org.openqa.selenium.By.cssSelector;
+
 public class ContactHelper extends HelperBase {
 
     public ContactHelper(WebDriver wd) {
@@ -74,11 +76,15 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContactById(int id) {
-        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+        wd.findElement(cssSelector("input[value='" + id + "']")).click();
     }
 
-    public void initContactModification(int i) {
-          wd.findElements(By.cssSelector("[title='Edit']")).get(i).click();
+  //  public void initContactModification(int i) {
+  //      wd.findElements(By.cssSelector("[title='Edit']")).get(i).click();
+  //  }
+
+    public void initContactModification() {
+        click(By.cssSelector("[title='Edit']"));
     }
 
     public void submitContactModification() {
@@ -96,14 +102,15 @@ public class ContactHelper extends HelperBase {
         saveContact();
     }
 
-    public void modify(int index, ContactData contact) {
+  /*  public void modify(int index, ContactData contact) {
         initContactModification(index);
         fillContactForm(contact, false);
         submitContactModification();
-    }
+    }*/
 
     public void modify(ContactData contact) {
-        initContactModification(contact.getId());
+        selectContactById(contact.getId());
+        initContactModification();
         fillContactForm(contact, false);
         submitContactModification();
     }
@@ -118,7 +125,7 @@ public class ContactHelper extends HelperBase {
         for (WebElement element : elements) {
             String lastName = element.findElement(By.xpath("td[2]")).getText();
             String firstName = element.findElement(By.xpath("td[3]")).getText();
-            int id = Integer.parseInt(element.findElement(By.cssSelector("input[name='selected[]']")).getAttribute("id"));
+            int id = Integer.parseInt(element.findElement(cssSelector("input[name='selected[]']")).getAttribute("id"));
             ContactData contact = new ContactData(id, firstName, null, lastName,null,null, null,null,null,null,null,null,null,null,null,null,null,null,null,null);
             contacts.add(contact);
         }

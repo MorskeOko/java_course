@@ -30,7 +30,7 @@ public class ContactModificationTest extends TestBase {
                     "18",
                     "December",
                     "1990",
-                    "testNew",
+                    "TheTest2",
                     "secondaryHome",
                     "secondary address"
             ), true);
@@ -42,7 +42,8 @@ public class ContactModificationTest extends TestBase {
     public void testContactModification() throws Exception {
         Contacts before = app.contact().all();
         ContactData modifiedContact = before.iterator().next();
-        ContactData contact = new ContactData("ChangedFirstName",
+        ContactData contact = new ContactData(modifiedContact.getId(),
+                "ChangedFirstName",
                 "ChangedMiddleName",
                 "ChangedLastName",
                 "nickName",

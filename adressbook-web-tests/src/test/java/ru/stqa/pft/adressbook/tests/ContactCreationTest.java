@@ -30,7 +30,7 @@ public class ContactCreationTest extends TestBase {
                 "18",
                 "December",
                 "1990",
-                "testNew",
+                "TheTest2",
                 "secondaryHome",
                 "secondary address"
         );
