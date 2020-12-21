@@ -84,12 +84,8 @@ public class ContactHelper extends HelperBase {
         wd.findElement(cssSelector("input[value='" + id + "']")).click();
     }
 
-  //  public void initContactModification(int i) {
-  //      wd.findElements(By.cssSelector("[title='Edit']")).get(i).click();
-  //  }
-
-    public void initContactModification() {
-        click(By.cssSelector("[title='Edit']"));
+    public void initContactModificationById(int id) {
+        wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
     }
 
     public void submitContactModification() {
@@ -108,28 +104,17 @@ public class ContactHelper extends HelperBase {
         contactCash = null;
     }
 
-  /*  public void modify(int index, ContactData contact) {
-        initContactModification(index);
-        fillContactForm(contact, false);
-        submitContactModification();
-    }*/
-
     public void modify(ContactData contact) {
-        selectContactById(contact.getId());
-        initContactModification();
+        initContactModificationById(contact.getId());
         fillContactForm(contact, false);
         submitContactModification();
         contactCash = null;
     }
 
-    public int getContactCount() {
-        return wd.findElements(By.name("selected[]")).size();
-    }
-
     private Contacts contactCash = null;
 
     public Contacts all() {
-        if (contactCash!=null){
+        if (contactCash != null) {
             return new Contacts(contactCash);
         }
         contactCash = new Contacts();
@@ -138,7 +123,7 @@ public class ContactHelper extends HelperBase {
             String lastName = element.findElement(By.xpath("td[2]")).getText();
             String firstName = element.findElement(By.xpath("td[3]")).getText();
             int id = Integer.parseInt(element.findElement(cssSelector("input[name='selected[]']")).getAttribute("id"));
-            ContactData contact = new ContactData(id, firstName, null, lastName,null,null, null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+            ContactData contact = new ContactData(id, firstName, null, lastName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
             contactCash.add(contact);
         }
         return new Contacts(contactCash);
