@@ -88,6 +88,10 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
     }
 
+    public void initContactModificationByIdSecond(int id) {
+        wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+    }
+
     public void submitContactModification() {
         //      click(By.xpath("//input[@name='update'])[2]"));
         click(By.name("update"));
@@ -123,9 +127,29 @@ public class ContactHelper extends HelperBase {
             String lastName = element.findElement(By.xpath("td[2]")).getText();
             String firstName = element.findElement(By.xpath("td[3]")).getText();
             int id = Integer.parseInt(element.findElement(cssSelector("input[name='selected[]']")).getAttribute("id"));
-            ContactData contact = new ContactData(id, firstName, null, lastName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+            ContactData contact = new ContactData()
+                    .withId(id)
+                    .withFirstName(firstName)
+                    .withLastName(lastName);
             contactCash.add(contact);
         }
         return new Contacts(contactCash);
+    }
+
+    public ContactData infoFromEditForm(ContactData contact) {
+        initContactModificationById(contact.getId());
+        String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastName = wd.findElement(By.name("lastname")).getAttribute("value");
+        String home = wd.findElement(By.name("home")).getAttribute("value");
+        String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        String work = wd.findElement(By.name("work")).getAttribute("value");
+        wd.navigate().back();
+        return new ContactData()
+                .withId(contact.getId())
+                .withFirstName(firstName)
+                .withLastName(lastName)
+                .withHome(home)
+                .withMobilePhone(mobile)
+                .withWorkPhone(work);
     }
 }

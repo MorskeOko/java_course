@@ -14,26 +14,23 @@ public class ContactModificationTest extends TestBase {
     public void ensurePreconditions() {
         app.goTo().homePage();
         if (app.contact().all().size()==0) {
-            app.contact().create(new ContactData("firstName",
-                    "middleName",
-                    "lastName",
-                    "nickName",
-                    "testTitle",
-                    "testCompany",
-                    "test address",
-                    "1",
-                    "+23456789",
-                    "+12345677",
-                    "n/a",
-                    "test@test.com",
-                    "n/a",
-                    "18",
-                    "December",
-                    "1990",
-                    "TheTest2",
-                    "secondaryHome",
-                    "secondary address"
-            ), true);
+            app.contact().create(new ContactData()
+                    .withFirstName("TheFirstName")
+                    .withMiddleName("middleName")
+                    .withLastName("lastName")
+                    .withTitle("testTitle")
+                    .withCompany("testCompany")
+                    .withAddress("test address")
+                    .withHome("1")
+                    .withMobilePhone("+23456789")
+                    .withWorkPhone("+12345677")
+                    .withEmail("test@test.com")
+                    .witBirthDay("18")
+                    .withBirthMonth("December")
+                    .withBirthYear("1990")
+                    .withSecondaryAddress("TheTest2")
+                    .withSecondaryHome("secondaryHome")
+                    .withSelectGroup("TheTest2") , true);
         }
         app.goTo().homePage();
     }
@@ -42,26 +39,13 @@ public class ContactModificationTest extends TestBase {
     public void testContactModification() throws Exception {
         Contacts before = app.contact().all();
         ContactData modifiedContact = before.iterator().next();
-        ContactData contact = new ContactData(modifiedContact.getId(),
-                "ChangedFirstName",
-                "ChangedMiddleName",
-                "ChangedLastName",
-                "nickName",
-                "testTitle",
-                "testCompany",
-                "test address",
-                "1",
-                "+23456789",
-                "+12345677",
-                "n/a",
-                "test@test.com",
-                "n/a",
-                "18",
-                "December",
-                "1990",
-                null,
-                "secondaryHome",
-                "secondary address");
+        ContactData contact = new ContactData()
+                .withId(modifiedContact.getId())
+                .withFirstName("ChangedFirstName")
+                .withLastName("ChangedLastName")
+                .witBirthDay("18")
+                .withBirthMonth("December")
+                .withBirthYear("1990");
         app.contact().modify(contact);
         app.goTo().homePage();
         assertThat(app.contact().count(), equalTo(before.size()));

@@ -14,26 +14,24 @@ public class ContactCreationTest extends TestBase {
         app.goTo().homePage();
         Contacts before = app.contact().all();
         app.contact().goToContactCreation();
-        ContactData contact = new ContactData("TheFirstName",
-                "middleName",
-                "lastName",
-                "nickName",
-                "testTitle",
-                "testCompany",
-                "test address",
-                "1",
-                "+23456789",
-                "+12345677",
-                "n/a",
-                "test@test.com",
-                "n/a",
-                "18",
-                "December",
-                "1990",
-                "TheTest2",
-                "secondaryHome",
-                "secondary address"
-        );
+        ContactData contact = new ContactData()
+                .withFirstName("TheFirstName")
+                .withMiddleName("middleName")
+                .withLastName("lastName")
+                .withTitle("testTitle")
+                .withCompany("testCompany")
+                .withAddress("test address")
+                .withHome("1")
+                .withMobilePhone("+23456789")
+                .withWorkPhone("+12345677")
+                .withEmail("test@test.com")
+                .witBirthDay("18")
+                .withBirthMonth("December")
+                .withBirthYear("1990")
+                .withSecondaryAddress("TheTest2")
+                .withSecondaryHome("secondaryHome")
+                .withSelectGroup("TheTest2");
+
         app.contact().create(contact, true);
         app.goTo().homePage();
         assertThat(app.contact().count(), equalTo(before.size()+1));
