@@ -24,6 +24,8 @@ public class ContactData {
     private  String selectGroup;
     private  int id= Integer.MAX_VALUE;
 
+    private String allPhones;
+
     public ContactData withFirstName(String firstName) {
         this.firstName = firstName;
         return this;
@@ -117,6 +119,15 @@ public class ContactData {
     public ContactData withSelectGroup(String selectGroup) {
         this.selectGroup = selectGroup;
         return this;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
     }
 
     public int getId() {

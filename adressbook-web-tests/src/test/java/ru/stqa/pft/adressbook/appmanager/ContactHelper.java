@@ -127,17 +127,15 @@ public class ContactHelper extends HelperBase {
             String lastName = element.findElement(By.xpath("td[2]")).getText();
             String firstName = element.findElement(By.xpath("td[3]")).getText();
             int id = Integer.parseInt(element.findElement(cssSelector("input[name='selected[]']")).getAttribute("id"));
-            String[] phones = element
+            String allPhones = element
                     .findElement(By.xpath("td[6]"))
-                    .getText()
-                    .split("\n");
+                    .getText();
+
             ContactData contact = new ContactData()
                     .withId(id)
                     .withFirstName(firstName)
                     .withLastName(lastName)
-                    .withHomePhone(phones[0])
-                    .withMobilePhone(phones[1])
-                    .withWorkPhone(phones[2]);
+                    .withAllPhones(allPhones);
             contactCash.add(contact);
         }
         return new Contacts(contactCash);
