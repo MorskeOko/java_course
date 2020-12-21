@@ -23,7 +23,7 @@ public class ContactDeletionTest extends TestBase {
                             .withTitle("testTitle")
                             .withCompany("testCompany")
                             .withAddress("test address")
-                            .withHome("1")
+                            .withHomePhone("1")
                             .withMobilePhone("+23456789")
                             .withWorkPhone("+12345677")
                             .withEmail("test@test.com")

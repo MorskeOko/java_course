@@ -59,7 +59,7 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withHome(String home) {
+    public ContactData withHomePhone(String home) {
         this.home = home;
         return this;
     }
@@ -151,7 +151,7 @@ public class ContactData {
         return address;
     }
 
-    public String getHome() {
+    public String getHomePhone() {
         return home;
     }
 
